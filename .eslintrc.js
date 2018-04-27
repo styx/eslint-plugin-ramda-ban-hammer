@@ -39,5 +39,17 @@ module.exports = {
     'no-param-reassign': ['error', { props: false }],
     'object-curly-spacing': ['error', 'never'],
     'func-names': ['error', 'as-needed'],
+    "prefer-destructuring": ["error", {
+      "VariableDeclarator": {
+        "array": false,
+        "object": true
+      },
+      "AssignmentExpression": {
+        "array": true,
+        "object": false
+      }
+    }, {
+      "enforceForRenamedProperties": false
+    }]
   }
 };
