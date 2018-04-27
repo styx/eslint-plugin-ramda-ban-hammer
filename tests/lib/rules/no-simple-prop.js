@@ -2,34 +2,43 @@
  * @fileoverview Forbids R.prop(&#39;key&#39;, obj)
  * @author Mikhail Pabalavets
  */
-"use strict";
 
-//------------------------------------------------------------------------------
-// Requirements
-//------------------------------------------------------------------------------
+const rule = require('../../../lib/rules/no-simple-prop');
+const {RuleTester} = require('eslint');
 
-var rule = require("../../../lib/rules/no-simple-prop"),
+const ruleTester = new RuleTester();
+ruleTester.run('no-simple-prop', rule, {
+  valid: [{
+    code: "R.prop('key')",
+  },
+  {
+    code: 'R.prop(key)',
+  }],
 
-    RuleTester = require("eslint").RuleTester;
-
-
-//------------------------------------------------------------------------------
-// Tests
-//------------------------------------------------------------------------------
-
-var ruleTester = new RuleTester();
-ruleTester.run("no-simple-prop", rule, {
-
-    valid: [
-    ],
-
-    invalid: [
-        {
-            code: "R.prop('key', obj)",
-            errors: [{
-                message: "Use obj.key or obj?.key",
-                type: "ERROR_MSG_SIMPLE_R_PROP"
-            }]
-        }
-    ]
+  invalid: [
+    {
+      code: "R.prop('key', obj)",
+      output: 'obj.key',
+      errors: [{
+        message: 'Prefer simple obj.key or obj?.key or obj[key]',
+        type: 'CallExpression',
+      }],
+    },
+    {
+      code: "R.prop('key-1', obj)",
+      output: "obj['key-1']",
+      errors: [{
+        message: 'Prefer simple obj.key or obj?.key or obj[key]',
+        type: 'CallExpression',
+      }],
+    },
+    {
+      code: 'R.prop(key, obj)',
+      output: 'obj[key]',
+      errors: [{
+        message: 'Prefer simple obj.key or obj?.key or obj[key]',
+        type: 'CallExpression',
+      }],
+    },
+  ],
 });
