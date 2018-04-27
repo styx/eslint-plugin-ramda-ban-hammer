@@ -40,5 +40,13 @@ ruleTester.run('no-simple-prop', rule, {
         type: 'CallExpression',
       }],
     },
+    {
+      code: 'R.prop("key", obj.call({}))',
+      output: 'obj.call({}).key',
+      errors: [{
+        message: 'Prefer simple obj.key or obj?.key or obj[key]',
+        type: 'CallExpression',
+      }],
+    },
   ],
 });
