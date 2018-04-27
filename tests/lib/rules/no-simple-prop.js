@@ -13,7 +13,11 @@ ruleTester.run('no-simple-prop', rule, {
   },
   {
     code: 'R.prop(key)',
-  }],
+  },
+  {
+    code: 'R.prop(R.__, icons)',
+  },
+  ],
 
   invalid: [
     {
