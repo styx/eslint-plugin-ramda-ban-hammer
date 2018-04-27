@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-ramda-ban-hammer",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Helper to get rid from Ramda",
   "keywords": [
     "eslint",
