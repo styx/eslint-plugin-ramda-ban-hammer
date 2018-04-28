@@ -46,5 +46,13 @@ ruleTester.run('no-compose-overuse', rule, {
         type: 'CallExpression',
       }],
     },
+    {
+      code: 'R.compose(R.path(["campaign", "askRemoveCampaingId"]), getState)()',
+      output: 'R.path(["campaign", "askRemoveCampaingId"])(getState())',
+      errors: [{
+        message: "Don't use R.compose when it is called at the same place",
+        type: 'CallExpression',
+      }],
+    },
   ],
 });
